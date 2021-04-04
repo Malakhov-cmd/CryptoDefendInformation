@@ -36,7 +36,8 @@ public class Service implements Runnable {
             String noise = hash(deCipherMessage);
 
             if (noise.equals(deCipherNoiseMessage)) {
-                System.out.println("true");
+                System.out.println("Correct");
+                System.out.println("Message: " + "\"" + deCipherMessage + "\"" + " was delivered!");
             }
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Incorrect type of algorithm");

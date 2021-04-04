@@ -7,8 +7,8 @@ import java.security.NoSuchProviderException;
 import java.util.concurrent.Exchanger;
 
 public class User implements Runnable {
-    private String password = "p$$word";
-    private String message = "Time to work";
+    private String password;
+    private String message;
 
     String cipherMessage;
     String cipherNoiseMessage;
@@ -17,7 +17,9 @@ public class User implements Runnable {
 
     private Exchanger<Data> exchanger;
 
-    public User(Exchanger<Data> exchanger){
+    public User(Exchanger<Data> exchanger, String password, String message){
+        this.password = password;
+        this.message = message;
         this.exchanger = exchanger;
     }
 
@@ -40,7 +42,7 @@ public class User implements Runnable {
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Incorrect type of algorithm");
         } catch (BadPaddingException e) {
-            System.out.println("The decryption key or method is incorrect, and the message may have been corrupted");
+            System.out.println("The decryption key or method is incorrect, or the message may have been corrupted");
         } catch (InvalidKeyException e) {
             System.out.println("Incorrect key");
         } catch (UnsupportedEncodingException e) {
