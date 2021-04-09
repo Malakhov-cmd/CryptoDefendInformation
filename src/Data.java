@@ -11,15 +11,7 @@ public class Data {
         return cipherMessage;
     }
 
-    public void setCipherMessage(String cipherMessage) {
-        this.cipherMessage = cipherMessage;
-    }
-
     public String getCipherNoiseMessage() {
         return cipherNoiseMessage;
-    }
-
-    public void setCipherNoiseMessage(String cipherNoiseMessage) {
-        this.cipherNoiseMessage = cipherNoiseMessage;
     }
 }

@@ -9,9 +9,9 @@ public class MainChannel {
         System.out.println("Enter password");
         String password = in.next();
         System.out.println("Enter your mail");
-        String massage = in.next();
+        String message = in.next();
 
-        Thread userThread = new Thread(new User(exchanger, password, massage));
+        Thread userThread = new Thread(new User(exchanger, password, message));
         Thread service = new Thread(new Service(exchanger));
 
         userThread.start();

@@ -1,9 +1,10 @@
-import javax.crypto.*;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.util.concurrent.Exchanger;
 
 public class User implements Runnable {
@@ -12,8 +13,6 @@ public class User implements Runnable {
 
     String cipherMessage;
     String cipherNoiseMessage;
-
-    private SecretKey key = null;
 
     private Exchanger<Data> exchanger;
 
@@ -25,19 +24,15 @@ public class User implements Runnable {
 
     @Override
     public void run() {
-        //1
         String hashMessage = hash(message);
 
         try {
-            //2
             SecretKeySpec secretKeySpec = new SecretKeySpec(password.getBytes(), "DES");
 
-            //3
             DesEncrypter encrypter = new DesEncrypter(secretKeySpec);
             cipherMessage = encrypter.encrypt(message);
             cipherNoiseMessage = encrypter.encrypt(hashMessage);
 
-            //4
             exchanger.exchange(new Data(cipherMessage, cipherNoiseMessage));
         } catch (NoSuchAlgorithmException e) {
             System.out.println("Incorrect type of algorithm");
